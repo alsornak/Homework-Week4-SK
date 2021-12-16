@@ -1,4 +1,3 @@
-// Start the quiz with a timer set to 75. Timer left also will be the final score.
 var timeLeft = 75;
 var timerID;
 var timerEl = document.getElementById("timer");
@@ -20,7 +19,6 @@ var scores = JSON.parse(localStorage.getItem("scores")) || [];
 var shuffledQuestions, currentQuestionIndex;
 
 
-// Start button trigger the first question and next button to display
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
     currentQuestionIndex++
@@ -28,7 +26,6 @@ nextButton.addEventListener("click", () => {
 });
 
 
-// Countdown timer
 function timeTick() {
     timeLeft--;
     timerEl.textContent = "Time: " + timeLeft;
@@ -38,7 +35,6 @@ function timeTick() {
 }
 
 
-// Start Quiz
 function startGame() {
     timerID = setInterval(timeTick, 1000);
     startContainerEl.classList.add("hide");
@@ -46,20 +42,19 @@ function startGame() {
     currentQuestionIndex = 0
     questionContainerEl.classList.remove("hide");
 
-    // Timer will start as soon as start button is clicked
     timeTick();
     setNextQuestion();
 };
 
 
-// Go to next question
+
 function setNextQuestion() {
     resetState();
     showQuestion(shuffledQuestions[currentQuestionIndex]);
 };
 
 
-// Display questions
+
 function showQuestion(question) {
     questionEl.innerText = question.question
     question.answers.forEach(answer => {
@@ -75,9 +70,8 @@ function showQuestion(question) {
 };
 
 
-// Reset state function
 function resetState() {
-    //clearStatusClass(document.body)
+
     nextButton.classList.add("hide")
     checkAnswerEl.classList.add("hide")
     while (answerButtonsEl.firstChild) {
@@ -87,13 +81,12 @@ function resetState() {
 };
 
 
-// Select answer function
 function selectAnswer(e) {
     var selectedButton = e.target;
-    //console.dir(selectedButton);
+
     var correct = selectedButton.dataset.correct;
     checkAnswerEl.classList.remove("hide")
-    // Check if the answer correct or wrong then show text
+    
     if (correct) {
         checkAnswerEl.innerHTML = "You got it right!";
     } else {
@@ -101,7 +94,7 @@ function selectAnswer(e) {
         if (timeLeft <= 10) {
             timeLeft = 0;
         } else {
-            // If the aswer is wrong, deduct time by 10
+            
             timeLeft -= 10;
         }
     }
@@ -120,7 +113,6 @@ function selectAnswer(e) {
 };
 
 
-// Check and show the correct answer by set the buttons colors
 function setStatusClass(element, correct) {
     clearStatusClass(element)
     if (correct) {
@@ -131,19 +123,17 @@ function setStatusClass(element, correct) {
 };
 
 
-// Remove all the classes
 function clearStatusClass(element) {
     element.classList.remove("correct");
     element.classList.remove("wrong");
 };
 
 
-// Save scores
 function saveScore() {
     clearInterval(timerID);
     timerEl.textContent = "Time: " + timeLeft;
     setTimeout(function () {
-        //localStorage.setItem("scores", JSON.stringify(scores));
+        
         questionContainerEl.classList.add("hide");
         document.getElementById("score-container").classList.remove("hide");
         document.getElementById("your-score").textContent = "Your final score is " + timeLeft;
@@ -153,30 +143,28 @@ function saveScore() {
 
 
 var loadScores = function () {
-    // Get score from local storage
-
-    if (!savedScores) {
+    
+    if (!saveScore) {
         return false;
     }
 
-    // Convert scores from stringfield format into array
-    savedScores = JSON.parse(savedScores);
+    saveScore = JSON.parse(saveScore);
     var initials = document.querySelector("#initials-field").value;
     var newScore = {
         score: timeLeft,
         initials: initials
     }
-    savedScores.push(newScore);
-    console.log(savedScores)
+    saveScore.push(newScore);
+    console.log(saveScore)
 
-    savedScores.forEach(score => {
+    saveScore.forEach(score => {
         initialsField.innerText = score.initials
         scoreField.innerText = score.score
     })
 };
 
 
-// Show high scores
+
 function showHighScores(initials) {
     document.getElementById("highscores").classList.remove("hide")
     document.getElementById("score-container").classList.add("hide");
@@ -191,7 +179,7 @@ function showHighScores(initials) {
 
     var highScoreEl = document.getElementById("highscore");
     highScoreEl.innerHTML = "";
-    //console.log(scores)
+    
     for (i = 0; i < scores.length; i++) {
         var div1 = document.createElement("div");
         div1.setAttribute("class", "name-div");
@@ -209,7 +197,6 @@ function showHighScores(initials) {
 };
 
 
-// View high scores link
 viewHighScores.addEventListener("click", showHighScores);
 
 
@@ -220,13 +207,11 @@ submitButton.addEventListener("click", function (event) {
 });
 
 
-// Restart or reload the page
 restartButton.addEventListener("click", function () {
     window.location.reload();
 });
 
 
-// Clear localStorage items 
 clearScoreButton.addEventListener("click", function () {
     localStorage.clear();
     document.getElementById("highscore").innerHTML = "";

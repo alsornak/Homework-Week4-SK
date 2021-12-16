@@ -6,8 +6,8 @@
   }
   
   :root {
-    --primary-color: #8207a1;
-    --secondary-color: rgb(211, 56, 144);
+    --primary-color:rgb(211, 56, 144);
+    --secondary-color: #8207a1;
     --tertiary-color: #aaaaaa;
     --white-color: #ffffff;
     --correct-color: rgb(211, 56, 144);

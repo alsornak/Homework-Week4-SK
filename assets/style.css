@@ -6,11 +6,11 @@
   }
   
   :root {
-    --primary-color: #cc6600;
-    --secondary-color: #ff9900;
+    --primary-color: #8207a1;
+    --secondary-color: rgb(211, 56, 144);
     --tertiary-color: #aaaaaa;
     --white-color: #ffffff;
-    --correct-color: #6b8e23;
+    --correct-color: rgb(211, 56, 144);
   }
   
   body {

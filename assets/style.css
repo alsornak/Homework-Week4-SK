@@ -40,14 +40,18 @@
   .timer {
     font-size: 20px;
   }
+
+  .timer {
+    color: var(--primary-color);
+  }
   
   .scores a {
-    color: var(--secondary-color);
+    color: var(--primary-color);
     cursor: pointer;
   }
   
   .scores a:hover {
-    color: var(--tertiary-color);
+    color: var(--secondary-color);
   }
   
   /* Start Quiz */

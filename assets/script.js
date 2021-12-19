@@ -20,7 +20,7 @@ var shuffledQuestions, currentQuestionIndex;
 
 
 startButton.addEventListener("click", startGame);
-nextButton.addEventListener("click", () => {
+nextButton.addEventListener("click", function(){
     currentQuestionIndex++
     setNextQuestion()
 });
@@ -38,7 +38,7 @@ function timeTick() {
 function startGame() {
     timerID = setInterval(timeTick, 1000);
     startContainerEl.classList.add("hide");
-    shuffledQuestions = questions.sort(() => Math.random() - .5)
+    shuffledQuestions = questions.sort(function(a, b){return 0.5 - Math.random()});
     currentQuestionIndex = 0
     questionContainerEl.classList.remove("hide");
 
@@ -57,7 +57,7 @@ function setNextQuestion() {
 
 function showQuestion(question) {
     questionEl.innerText = question.question
-    question.answers.forEach(answer => {
+    question.answers.forEach(function(answer){
         var button = document.createElement("button")
         button.innerText = answer.text
         button.classList.add("btn")
@@ -75,8 +75,7 @@ function resetState() {
     nextButton.classList.add("hide")
     checkAnswerEl.classList.add("hide")
     while (answerButtonsEl.firstChild) {
-        answerButtonsEl.removeChild
-            (answerButtonsEl.firstChild)
+        answerButtonsEl.removeChild(answerButtonsEl.firstChild)           
     }
 };
 
@@ -99,7 +98,7 @@ function selectAnswer(e) {
         }
     }
 
-    Array.from(answerButtonsEl.children).forEach(button => {
+    Array.from(answerButtonsEl.children).forEach(function(button){
         setStatusClass(button, button.dataset.correct)
     })
 
@@ -138,7 +137,7 @@ function saveScore() {
         document.getElementById("score-container").classList.remove("hide");
         document.getElementById("your-score").textContent = "Your final score is " + timeLeft;
 
-    }, 2000)
+    }, 1000)
 };
 
 
@@ -157,7 +156,7 @@ var loadScores = function () {
     saveScore.push(newScore);
     console.log(saveScore)
 
-    saveScore.forEach(score => {
+    saveScore.forEach(function(score){
         initialsField.innerText = score.initials
         scoreField.innerText = score.score
     })
@@ -215,4 +214,4 @@ restartButton.addEventListener("click", function () {
 clearScoreButton.addEventListener("click", function () {
     localStorage.clear();
     document.getElementById("highscore").innerHTML = "";
-});
+}); 

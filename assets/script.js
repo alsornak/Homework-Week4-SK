@@ -152,7 +152,7 @@ var loadScores = function () {
     var newScore = {
         score: timeLeft,
         initials: initials
-    }
+    };
     saveScore.push(newScore);
     console.log(saveScore)
 
